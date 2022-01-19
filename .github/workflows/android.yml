@@ -36,5 +36,5 @@ jobs:
     - name: publish releases
       uses: kyze8439690/action-release-releaseapk@master
       env:
-       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+       GITHUB_TOKEN: ${{ github.token }}
        APP_FOLDER: app
