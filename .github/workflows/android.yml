@@ -8,24 +8,31 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v2
-    - name: set up JDK 11
+    - name: checkout code
+      uses: actions/checkout@v2
+
+    - name: setup JDK
       uses: actions/setup-java@v2
       with:
-        java-version: '8'
-        distribution: 'temurin'
-        cache: gradle
+        java-version: 11
 
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
+
     - name: Build with Gradle
       run: ./gradlew assembleDebug
+ # or run: ./gradlew assembleRelease
+
     - name: Archive artifacts
       uses: actions/upload-artifact@v2
       with:
         name: build
         path: app/build/outputs
+        
+    - name: publish releases
+      uses: kyze8439690/action-release-releaseapk@master
+      env:
+       GITHUB_TOKEN: ${{ secrets.TOKEN }}
+       APP_FOLDER: app
