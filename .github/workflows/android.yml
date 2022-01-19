@@ -34,7 +34,7 @@ jobs:
         path: app/build/outputs
 
     - name: publish releases
-      uses: kyze8439690/action-release-releaseapk@master
-      env:
-       GITHUB_TOKEN: ${{ github.token }}
-       APP_FOLDER: app
+      uses: softprops/action-gh-release@v1
+      with:
+        files: app/build/**/*.apk
+
